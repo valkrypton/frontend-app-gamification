@@ -18,14 +18,17 @@ function activeDaySet(currentStreak: number, lastActiveDate: string | null): Set
   return days;
 }
 
+function midnightUtc(date: Date): number {
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
 const ActivityStrip = ({ currentStreak, lastActiveDate, referenceDate = new Date() }: Props) => {
   const active = activeDaySet(currentStreak, lastActiveDate);
-  const days = Array.from({ length: 7 }, (_unused, i) => {
-    const d = new Date(Date.UTC(
-      referenceDate.getUTCFullYear(), referenceDate.getUTCMonth(), referenceDate.getUTCDate(),
-    ) - (6 - i) * DAY_MS);
-    return d.toISOString().slice(0, 10);
-  });
+  const referenceMidnightUtc = midnightUtc(referenceDate);
+  const days = Array.from(
+    { length: 7 },
+    (_unused, i) => new Date(referenceMidnightUtc - (6 - i) * DAY_MS).toISOString().slice(0, 10),
+  );
 
   return (
     <div className="d-flex" data-testid="activity-strip">

@@ -18,13 +18,21 @@ describe.each([
   ['useStreak', useStreak, 'getStreak', { current_streak: 3, longest_streak: 5, last_active_date: '2026-08-20' }],
   ['useBadges', useBadges, 'getBadges', [
     {
-      slug: 'first-step', name: 'First Step', description: '', points_bonus: 25,
-      earned: true, awarded_at: '2026-08-20T00:00:00Z',
+      slug: 'first-step',
+      name: 'First Step',
+      description: '',
+      points_bonus: 25,
+      earned: true,
+      awarded_at: '2026-08-20T00:00:00Z',
     },
   ]],
   ['useRankingStatus', useRankingStatus, 'getRankingStatus', {
-    course_id: 'course-v1:x', handle: 'Quiet Falcon 01', opted_in: true,
-    opted_in_at: '2026-08-20T00:00:00Z', handle_generated_at: '2026-08-20T00:00:00Z', handle_regenerated: false,
+    course_id: 'course-v1:x',
+    handle: 'Quiet Falcon 01',
+    opted_in: true,
+    opted_in_at: '2026-08-20T00:00:00Z',
+    handle_generated_at: '2026-08-20T00:00:00Z',
+    handle_regenerated: false,
   }],
 ])('%s', (_name, hook, apiFnName, fixture) => {
   it('fetches and returns data for the given course', async () => {
@@ -57,8 +65,12 @@ describe('useLeaderboard', () => {
 describe('useOptIn', () => {
   it('invalidates ranking-status and leaderboard queries for the course on success', async () => {
     (api.postRankingOptIn as jest.Mock).mockResolvedValue({
-      course_id: 'course-v1:x', handle: 'Quiet Falcon 01', opted_in: true,
-      opted_in_at: '2026-08-25T00:00:00Z', handle_generated_at: '2026-08-25T00:00:00Z', handle_regenerated: false,
+      course_id: 'course-v1:x',
+      handle: 'Quiet Falcon 01',
+      opted_in: true,
+      opted_in_at: '2026-08-25T00:00:00Z',
+      handle_generated_at: '2026-08-25T00:00:00Z',
+      handle_regenerated: false,
     });
     const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
     const invalidateSpy = jest.spyOn(queryClient, 'invalidateQueries');

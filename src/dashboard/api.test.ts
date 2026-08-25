@@ -42,8 +42,12 @@ describe('api', () => {
   it('getRankingStatus requests the ranking status endpoint with course_id', async () => {
     mockGet.mockResolvedValue({
       data: {
-        course_id: 'course-v1:x', handle: null, opted_in: false, opted_in_at: null,
-        handle_generated_at: null, handle_regenerated: false,
+        course_id: 'course-v1:x',
+        handle: null,
+        opted_in: false,
+        opted_in_at: null,
+        handle_generated_at: null,
+        handle_regenerated: false,
       },
     });
     await getRankingStatus('course-v1:x');
@@ -59,8 +63,12 @@ describe('api', () => {
   it('postRankingOptIn posts course_id plus the request body', async () => {
     mockPost.mockResolvedValue({
       data: {
-        course_id: 'course-v1:x', handle: 'Quiet Falcon 01', opted_in: true,
-        opted_in_at: '2026-08-25T00:00:00Z', handle_generated_at: '2026-08-25T00:00:00Z', handle_regenerated: false,
+        course_id: 'course-v1:x',
+        handle: 'Quiet Falcon 01',
+        opted_in: true,
+        opted_in_at: '2026-08-25T00:00:00Z',
+        handle_generated_at: '2026-08-25T00:00:00Z',
+        handle_regenerated: false,
       },
     });
     await postRankingOptIn('course-v1:x', { opted_in: true });

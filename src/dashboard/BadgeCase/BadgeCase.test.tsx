@@ -22,12 +22,20 @@ describe('BadgeCase', () => {
   it('shows an earned badge lit and a locked badge with its trigger hint', async () => {
     (api.getBadges as jest.Mock).mockResolvedValue([
       {
-        slug: 'first-step', name: 'First Step', description: 'Complete your first activity',
-        points_bonus: 25, earned: true, awarded_at: '2026-08-20T00:00:00Z',
+        slug: 'first-step',
+        name: 'First Step',
+        description: 'Complete your first activity',
+        points_bonus: 25,
+        earned: true,
+        awarded_at: '2026-08-20T00:00:00Z',
       },
       {
-        slug: 'on-a-roll', name: 'On a Roll', description: 'Reach a 7-day streak',
-        points_bonus: 100, earned: false, awarded_at: null,
+        slug: 'on-a-roll',
+        name: 'On a Roll',
+        description: 'Reach a 7-day streak',
+        points_bonus: 100,
+        earned: false,
+        awarded_at: null,
       },
     ]);
     renderCase();

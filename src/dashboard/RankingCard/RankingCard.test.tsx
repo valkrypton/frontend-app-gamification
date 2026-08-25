@@ -23,8 +23,12 @@ function renderCard() {
 describe('RankingCard', () => {
   it('shows only the toggle, with no leaderboard fetch, when not opted in', async () => {
     (api.getRankingStatus as jest.Mock).mockResolvedValue({
-      course_id: 'course-v1:x', handle: null, opted_in: false, opted_in_at: null,
-      handle_generated_at: null, handle_regenerated: false,
+      course_id: 'course-v1:x',
+      handle: null,
+      opted_in: false,
+      opted_in_at: null,
+      handle_generated_at: null,
+      handle_regenerated: false,
     });
     renderCard();
     expect(await screen.findByRole('switch')).not.toBeChecked();
@@ -33,8 +37,12 @@ describe('RankingCard', () => {
 
   it('shows the handle and leaderboard, with regenerate disabled once used, when opted in', async () => {
     (api.getRankingStatus as jest.Mock).mockResolvedValue({
-      course_id: 'course-v1:x', handle: 'Quiet Falcon 01', opted_in: true,
-      opted_in_at: '2026-08-20T00:00:00Z', handle_generated_at: '2026-08-20T00:00:00Z', handle_regenerated: true,
+      course_id: 'course-v1:x',
+      handle: 'Quiet Falcon 01',
+      opted_in: true,
+      opted_in_at: '2026-08-20T00:00:00Z',
+      handle_generated_at: '2026-08-20T00:00:00Z',
+      handle_regenerated: true,
     });
     (api.getLeaderboard as jest.Mock).mockResolvedValue({
       entries: [{ handle: 'Quiet Falcon 01', points_band: '0-49' }], viewer_band: 'top 25%',
@@ -47,12 +55,20 @@ describe('RankingCard', () => {
 
   it('toggles opt-in when the switch is changed', async () => {
     (api.getRankingStatus as jest.Mock).mockResolvedValue({
-      course_id: 'course-v1:x', handle: null, opted_in: false, opted_in_at: null,
-      handle_generated_at: null, handle_regenerated: false,
+      course_id: 'course-v1:x',
+      handle: null,
+      opted_in: false,
+      opted_in_at: null,
+      handle_generated_at: null,
+      handle_regenerated: false,
     });
     (api.postRankingOptIn as jest.Mock).mockResolvedValue({
-      course_id: 'course-v1:x', handle: 'Quiet Falcon 01', opted_in: true,
-      opted_in_at: '2026-08-25T00:00:00Z', handle_generated_at: '2026-08-25T00:00:00Z', handle_regenerated: false,
+      course_id: 'course-v1:x',
+      handle: 'Quiet Falcon 01',
+      opted_in: true,
+      opted_in_at: '2026-08-25T00:00:00Z',
+      handle_generated_at: '2026-08-25T00:00:00Z',
+      handle_regenerated: false,
     });
     renderCard();
     const toggle = await screen.findByRole('switch');
