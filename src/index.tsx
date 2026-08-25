@@ -10,7 +10,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Header from '@edx/frontend-component-header';
 import { FooterSlot } from '@edx/frontend-component-footer';
@@ -24,17 +24,19 @@ const queryClient = new QueryClient();
 const container = document.getElementById('root');
 const root = createRoot(container!);
 
+// AppProvider already wraps its children in a react-router BrowserRouter
+// (with a basename derived from PUBLIC_PATH) -- do not add another one here.
+// Nesting a second <BrowserRouter> throws "You cannot render a <Router>
+// inside another <Router>" at runtime.
 subscribe(APP_READY, () => {
   root.render(
     <AppProvider>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path="/course/:courseId" element={<DashboardPage />} />
-          </Routes>
-          <FooterSlot />
-        </BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/course/:courseId" element={<DashboardPage />} />
+        </Routes>
+        <FooterSlot />
       </QueryClientProvider>
     </AppProvider>,
     document.getElementById('root'),
