@@ -20,8 +20,8 @@ const StreakCard = ({ courseId }: Props) => {
         {isError && <Alert variant="danger">{intl.formatMessage(messages.error)}</Alert>}
         {data && (
           <>
-            <div className="d-flex gap-4 mb-3">
-              <div>
+            <div className="d-flex mb-3">
+              <div className="mr-5">
                 <div className="h2 mb-0">{data.current_streak}</div>
                 <div className="text-muted">{intl.formatMessage(messages.current)}</div>
               </div>
