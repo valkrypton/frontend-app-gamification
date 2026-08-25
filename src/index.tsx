@@ -10,11 +10,12 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Header from '@edx/frontend-component-header';
 import { FooterSlot } from '@edx/frontend-component-footer';
 import messages from './i18n';
-import ExamplePage from './example/ExamplePage';
+import DashboardPage from './dashboard/DashboardPage';
 
 import './index.scss';
 
@@ -27,9 +28,13 @@ subscribe(APP_READY, () => {
   root.render(
     <AppProvider>
       <QueryClientProvider client={queryClient}>
-        <Header />
-        <ExamplePage />
-        <FooterSlot />
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/course/:courseId" element={<DashboardPage />} />
+          </Routes>
+          <FooterSlot />
+        </BrowserRouter>
       </QueryClientProvider>
     </AppProvider>,
     document.getElementById('root'),
